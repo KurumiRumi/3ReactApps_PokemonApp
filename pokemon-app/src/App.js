@@ -8,6 +8,7 @@ function App() {
 
   // ローディング用
   const [loading, setLoading] = useState(true);
+  const [pokemonData, setPokemonData] = useState([]);
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -23,13 +24,16 @@ function App() {
     fetchPokemonData();
   }, []);
 
-  const loadPokemon = (data) => {
-    let _pokemonData = Promise.all(
+  const loadPokemon = async (data) => {
+    // Promise.all(配列): 全ての配列の処理の完了を待つ
+    let _pokemonData = await Promise.all(
       data.map((pokemon) => {
         let pokemonRecord = getPokemon(pokemon.url);
         return pokemonRecord;
       })
     );
+
+    setPokemonData(_pokemonData);
   };
 
   return (
