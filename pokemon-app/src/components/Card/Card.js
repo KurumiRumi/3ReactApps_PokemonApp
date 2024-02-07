@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Card.css"
+import "./Card.css";
 
 const Card = ({ pokemon }) => {
   return (
@@ -13,10 +13,10 @@ const Card = ({ pokemon }) => {
         <div>タイプ</div>
         {pokemon.types.map((type) => {
           return (
-            <div>
+            <div key={type.type.name}>
               <span className="typeName">{type.type.name}</span>
             </div>
-          )
+          );
         })}
       </div>
       <div className="cardInfo">
@@ -27,7 +27,9 @@ const Card = ({ pokemon }) => {
           <p className="title">高さ: {pokemon.height}</p>
         </div>
         <div className="cardData">
-          <p className="title">アビリティ: {pokemon.abilities[0].ability.name}</p>
+          <p className="title">
+            アビリティ: {pokemon.abilities[0].ability.name}
+          </p>
         </div>
       </div>
     </div>

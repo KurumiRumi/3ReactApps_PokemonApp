@@ -11,6 +11,7 @@ function App() {
   // ローディング用
   const [loading, setLoading] = useState(true);
   const [pokemonData, setPokemonData] = useState([]);
+  const [prevURL, setPrevURL] = useState("");
   const [nextURL, setNextURL] = useState("");
 
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
       // 各ポケモンの詳細なデータを取得
       loadPokemon(res.results);
 
+      setPrevURL(res.previous);
       setNextURL(res.next);
       setLoading(false);
     };
@@ -40,12 +42,26 @@ function App() {
     setPokemonData(_pokemonData);
   };
 
-  const handlePrevPage = () => {};
+  const handlePrevPage = async () => {
+    if (!prevURL) return;
+
+    setLoading(true);
+    let data = await getAllPokemon(prevURL);
+
+    await loadPokemon(data.results);
+    setPrevURL(data.previous);
+    setNextURL(data.next);
+    setLoading(false);
+  };
+
   const handleNextPage = async () => {
+    if (!nextURL) return;
+
     setLoading(true);
     let data = await getAllPokemon(nextURL);
 
     await loadPokemon(data.results);
+    setPrevURL(data.previous);
     setNextURL(data.next);
     setLoading(false);
   };
