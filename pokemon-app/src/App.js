@@ -78,10 +78,10 @@ function App() {
               {pokemonData.map((pokemon, i) => {
                 return <Card key={i} pokemon={pokemon} />;
               })}
-              <div className="btn">
-                <button onClick={handlePrevPage}>前へ</button>
-                <button onClick={handleNextPage}>次へ</button>
-              </div>
+            </div>
+            <div className="btn">
+              <button onClick={handlePrevPage}>前へ</button>
+              <button onClick={handleNextPage}>次へ</button>
             </div>
           </>
         )}
